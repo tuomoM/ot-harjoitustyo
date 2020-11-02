@@ -1,0 +1,59 @@
+
+commit dd5566ace469a4e792d09a2a7a54fc8aeef67024
+Author: TuomoM <tuomo.mehtala@gmail.com>
+Date:   Mon Nov 2 22:46:06 2020 +0200
+
+    eka commmit
+
+ tiedostoja/file22 | 0
+ tiedostoja/file3  | 1 +
+ 2 files changed, 1 insertion(+)
+
+commit b661721b54eecd54e1cffd9a8accdbb4e6b9b9ed
+Author: TuomoM <tuomo.mehtala@gmail.com>
+Date:   Mon Nov 2 22:35:02 2020 +0200
+
+    tiedostot
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit b3c8aa5e50e9d9729b1dfb2005a19a757bcd10df
+Author: TuomoM <tuomo.mehtala@gmail.com>
+Date:   Mon Nov 2 22:33:07 2020 +0200
+
+    lisätty 1 lisää
+
+ eka.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit edbbcc7b0b0958594dbf3712aeadda65a0162071
+Author: TuomoM <tuomo.mehtala@gmail.com>
+Date:   Mon Nov 2 22:02:25 2020 +0200
+
+    uusi file
+
+ kolmas.txt | 0
+ toinen.txt | 1 +
+ 2 files changed, 1 insertion(+)
+
+commit 5ef898e0c3d4e1e9505a2e00229151b9ee83fef2
+Author: TuomoM <tuomo.mehtala@gmail.com>
+Date:   Sun Nov 1 21:43:37 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit d55d28f438d79453a6858fed0a9ef0ef872d6409
+Author: TuomoM <tuomo.mehtala@gmail.com>
+Date:   Sun Nov 1 21:41:15 2020 +0200
+
+    tiedosto luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
