@@ -7,5 +7,9 @@ Updates coming weekly until complete.
 
 
 [Requirements](documentation/REQUIREMENTS.md)
+
+
 [Architecture](documentation/ARCHITECTURE.md)
+
+
 [Hours tracking](hours/TRACKING.md)
