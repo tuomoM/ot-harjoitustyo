@@ -14,9 +14,8 @@ Score keeper is used to keep track of game progress and score. The actual indivi
   * All other players receive value of the difference between each other, so that the one with lowest score pays to all others the difference between his/her hand to other players hand
   * if the winner is not the wind of the game, the wind moves forward to next player. if wind of the game won she/he will remain the wind for the coming round aswell.	 
   * once the wind of the game returns to the first player, system will ask whether the players wish to continue for another game. If they do, the game starts with the current points from start. If the players are not willing to continue, the system will display end results
-
+* It is possible to save and load game from database
 
 
 Future options
-* possibility to save game to database and continue it later
 * Statistics for the players, who has won most and who has lost most, how many consecutive wins / player

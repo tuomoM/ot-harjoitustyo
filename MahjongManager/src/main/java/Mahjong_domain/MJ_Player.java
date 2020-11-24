@@ -12,5 +12,12 @@ package Mahjong_domain;
  */
 public class MJ_Player {
     //
+    private String name;
     
+    public MJ_Player(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
+    }
 }
