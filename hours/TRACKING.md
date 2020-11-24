@@ -2,7 +2,7 @@
 
 
 Activity | hours| date
----------|-------------
+---------|------|-------
 Requirements writing| 1 |16-11-2020
 Fighthing with netbeans | 4|16-11-2020
 Writing the first classes| 6|17-11-2020
