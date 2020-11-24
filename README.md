@@ -5,6 +5,12 @@ Currently running non graphical user interface and no possibility of saving game
 Updates coming weekly until complete.
 
 
+To run current version, replicate repository to your computer. In folder MahjongManager run 
+
+mvn compile exec:java -Dexec.mainClass=Mahjong_UI.MJ_TextUI
+
+to start the program.
+
 
 [Requirements](documentation/REQUIREMENTS.md)
 
