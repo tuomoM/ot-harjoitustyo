@@ -80,16 +80,16 @@ public class MjPlayerDoaTest {
         }
     }
     
-    @Test
-    public void canCreaTwentyPlayers(){
-        try{
-            
-            for(int i = 0;i<2;i++)playerDB.savePlayer(new MJ_Player("Barack Obama the "+i+"s"));
-            assertTrue(playerDB.getPlayers()[1].getName().equals("Barack Obama the 2s"));
-        }catch(SQLException e){
-              System.out.println("Database exeception 6:"+e.getMessage());
-        }
-    }
+//    @Test
+//    public void canCreaTwentyPlayers(){
+//        try{
+//            
+//            for(int i = 0;i<2;i++)playerDB.savePlayer(new MJ_Player("Barack Obama the "+i+"s"));
+//            assertTrue(playerDB.getPlayers()[1].getName().equals("Barack Obama the 2s"));
+//        }catch(SQLException e){
+//              System.out.println("Database exeception 6:"+e.getMessage());
+//        }
+//    }
     @Test
     public void onlyTwentyPlayersReturned(){
         try{

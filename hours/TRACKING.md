@@ -1,4 +1,4 @@
-#Hours tracking#
+#Hours tracking
 
 
 Activity | hours| date
@@ -17,4 +17,6 @@ Defining and creating the player save and load|4|24-11-2020
 Creating the first tests for DOA and finally solving the jacoco problem! thanks to Kalle!|5|27-11-2020
 Creating the save functions for game|6|28-11-2020
 Creating the load game functions|4|29-11-2020
-Trying to get rid of sqlite_busy exceptions|2|30-11-2020
+Trying to get rid of sqlite_busy exceptions|3|30-11-2020
+Debuggin saving loaded game (save changes) |3|30-11-2020
+*Total*|34,5|

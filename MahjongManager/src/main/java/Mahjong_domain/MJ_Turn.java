@@ -26,6 +26,7 @@ public class MJ_Turn  {
         this.money = money;
         this.power = power;
         this.turnNo = turnNo;
+        this.id = -1;
     }
     public MJ_Turn(int startMoney){
         this.winner = -1;
@@ -36,6 +37,8 @@ public class MJ_Turn  {
         }
         this.power = 0;
         this.turnNo = 1;
+        this.id=-1;
+             
         
         
     }

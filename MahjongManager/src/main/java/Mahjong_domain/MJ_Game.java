@@ -31,6 +31,7 @@ public class MJ_Game {
         this.turns = new ArrayList<>();
         this.gameEnd = false;
         turn = new MJ_Turn(startAmount);
+        this.gameId = -1;
         this.power = 0;
         try {
             this.gamedb = new MJ_Game_DOA(false);
@@ -119,7 +120,7 @@ public class MJ_Game {
  
     }
     public void nextTurn(int winner){
-        int nextP = turn.getPower();
+        int nextP = this.power;
         MJ_Turn nextTurn;
         if(nextP != winner) nextP++;
         if(nextP == 4) nextP = 0;
@@ -149,9 +150,9 @@ public class MJ_Game {
     }
     public boolean saveGame(){
         try {
-            this.turns.add(turn);
+            this.turns.add(this.turn);
             gamedb.saveGame(this);
-            this.turns.remove(turn);
+           // this.turns.remove(turn);
         } catch (SQLException ex) {
             Logger.getLogger(MJ_Game.class.getName()).log(Level.SEVERE, null, ex);
             return false;

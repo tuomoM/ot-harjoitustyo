@@ -74,9 +74,10 @@ public class MJ_Player_DOA {
        p.setString(1, player.getName());
        p.executeUpdate();
        
-       ResultSet r = p.getGeneratedKeys();
-     
-       player.setId(r.getInt(1));
+        try (ResultSet r = p.getGeneratedKeys()) {
+            player.setId(r.getInt(1));
+        }
+        
        db.close();
    }
     
