@@ -11,8 +11,8 @@ import java.util.Arrays;
  *
  * @author tuomomehtala
  */
-public class MJ_Turn {
-    
+public class MJ_Turn  {
+   private int id; 
    private int[] money;
    private int[] score;
    private int winner;
@@ -39,12 +39,19 @@ public class MJ_Turn {
         
         
     }
-    public MJ_Turn(int[] money, int power, int winner, int turnNo, int[] score){ // this method is for loading the instances from database.
+    public int getId(){
+        return this.id;
+    }
+    public int getWinner(){
+        return this.winner;
+    }
+    public MJ_Turn(int[] money, int power, int winner, int turnNo, int[] score, int id){ // this method is for loading the instances from database.
         this.winner = winner;
         this.score = score;
         this.money = money;
         this.power = power;
         this.turnNo = turnNo;
+        this.id = id;
     }
     public void setScore(int score, int player){
         if(player<4&&score>0)
@@ -159,5 +166,9 @@ public class MJ_Turn {
       String output = Arrays.toString(money);
       return output;
     }
+
+   
+
+    
     
 }

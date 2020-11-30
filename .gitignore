@@ -3,3 +3,5 @@
 /laskarit/viikko2/Unicafe/target/
 /MahjongManager/target/*
 /MahjongManager/nbproject/*
+/MahjongManager/MjDb.db
+/MahjongManager/MjTest.db

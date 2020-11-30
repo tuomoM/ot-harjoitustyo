@@ -5,6 +5,7 @@
  */
 package Mahjong_UI;
 import Mahjong_domain.*;
+import Mahjong_DOA.*;
 import java.sql.*;
 import java.util.*;
 import java.util.Scanner;
@@ -16,7 +17,10 @@ public class MJ_TextUI {
     
     public static void main(String[] args) throws SQLException {
         int resp = 0;
+        MJ_Player_DOA playerDb = new MJ_Player_DOA(false);
         MJ_Player[] players = new MJ_Player[4];
+        MJ_Player[] allPlayers = playerDb.getPlayers();
+       
       
         Scanner reader = new Scanner(System.in);
         printMenuOne();
@@ -25,13 +29,60 @@ public class MJ_TextUI {
             case 1:
                         System.out.println("Input players");
         for (int i=0; i<4;i++){
+            if(allPlayers[0]==null){
             System.out.println("Player no: " + (i+1));
+            }else{
+                int index = 1;
+                while(true){
+                    
+                    System.out.println(index +" : "+allPlayers[index-1].getName());
+                    if(index >= 100) break;
+                    if(allPlayers[index]==null)break; 
+                    index++;
+                }
+                System.out.println("Choose players ( 1-"+index+" ) choose 0 to create a new player");
+                resp = Integer.valueOf(reader.nextLine());
+                if(resp!=0){
+                    players[i] = allPlayers[resp-1];
+                    continue;
+                }else{
+                    System.out.println("Input name of player:");
+                }
+            }
             players[i]=new MJ_Player(reader.nextLine());
+            playerDb.savePlayer(players[i]);
             
         }
-                MJ_Game game = new MJ_Game(players,1000);
-                play(game,reader);    
-                    
+                playerDb.closeDb();
+                MJ_Game game = new MJ_Game(players,1000,false);
+                play(game,reader);   
+                break;
+            case 2:
+                
+                playerDb.closeDb();
+                MJ_Game_DOA gamedb = new MJ_Game_DOA(false);
+                HashMap<Integer,java.sql.Date> openGames = gamedb.getOpenGames();
+                gamedb.closeDb();
+                int gameid = -1;
+                while(true){
+                System.out.println("Open games:");
+               
+                   openGames.forEach((id,date)->{
+                       System.out.println(id+" "+date.toString());
+                   });
+                
+                    System.out.println("Input gameID to be loaded, (0 quits)");
+                 gameid = Integer.valueOf(reader.nextLine());
+                 if(gameid==0) break;
+                 if(openGames.containsKey(gameid)) break;
+                }
+  
+            
+            if(gameid!=0){
+                MJ_Game loadedGame = new MJ_Game(gameid,false);
+                play(loadedGame,reader);
+            }
+           
         }
         
        
@@ -53,21 +104,30 @@ public class MJ_TextUI {
         int resp = -1;
         int amount = 0;
         while(true){
-            System.out.println(Arrays.toString(game.getPlayers()));
+            System.out.println(Arrays.toString(game.getPlayerNames()));
             System.out.println(game);
             System.out.println("****************************");
             System.out.println(Arrays.toString(game.getRoundScore()));
             System.out.println("Power : "+game.powerPlayer());
             printGameMenu();
             resp = Integer.valueOf(reader.nextLine().trim());
-            if(resp<1) break;
+            if(resp<1){
+                if( game.saveGame()){
+                    System.out.println("Game saved, game id: "+game.getId());
+                }else{
+                    System.out.println("Game was not saved");
+                }
+                break;
+                
+            }else
             if(resp<5){
                 givePoints(resp-1,reader,game);
                 
             }else if(resp == 5){
                 endRound(reader,game);
                 
-            }else{
+            }
+            else{
                 game.endGame();
                 System.out.println("Game over");
                 System.out.println("Winner: "+game.winner().getName() );

@@ -13,3 +13,8 @@ Fighting with jacoco(lost the fight)|2|24-11-2020
 Trying to figure out how to clean the repository (no success)|1|24-11-2020
 Installing Checkstyle |0.5|24-11-2020
 Creating the architecture graph|2|24-11-2020
+Defining and creating the player save and load|4|24-11-2020
+Creating the first tests for DOA and finally solving the jacoco problem! thanks to Kalle!|5|27-11-2020
+Creating the save functions for game|6|28-11-2020
+Creating the load game functions|4|29-11-2020
+Trying to get rid of sqlite_busy exceptions|2|30-11-2020
