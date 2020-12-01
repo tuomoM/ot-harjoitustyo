@@ -115,7 +115,8 @@ public class MJ_Game {
         }
         this.winner = players[local_winner];
         this.winScore = localMoney[local_winner];
-        return false; // to be fixed
+        return saveGame();
+        
     }
     public void setScore(int playerId, int score){
         turn.setScore(score, playerId);
