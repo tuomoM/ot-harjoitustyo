@@ -19,4 +19,6 @@ Creating the save functions for game|6|28-11-2020
 Creating the load game functions|4|29-11-2020
 Trying to get rid of sqlite_busy exceptions|3|30-11-2020
 Debuggin saving loaded game (save changes) |3|30-11-2020
-*Total*|34,5|
+Fixing SQLITE locked issue |2|30-11-2020
+Creating a JAR file for release|0.5|1-12-2020
+*Total*|52|
