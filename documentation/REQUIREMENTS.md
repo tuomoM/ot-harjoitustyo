@@ -2,7 +2,7 @@
 
 Score keeper is used to keep track of game progress and score. The actual individual score after each round is calculated by players manually and inputted to system, which will take care of calculations.
 
-##Planned functionalities ##
+#Planned functionalities #
 * Create new player profile
 
 * Start a new game (Ok)
