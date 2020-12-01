@@ -2,9 +2,8 @@
 
 Score keeper is used to keep track of game progress and score. The actual individual score after each round is calculated by players manually and inputted to system, which will take care of calculations.
 
-#Planned functionalities #
-* Create new player profile
-
+## Planned functionalities ##
+* Create new player profile (ok)
 * Start a new game (Ok)
 * choose 4 players from the player profiles, if not available, move to create new player profile. (OK)
 * Game will start with East being the game  wind assigned to player in slot 1. (OK)
