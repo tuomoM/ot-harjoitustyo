@@ -20,4 +20,4 @@ to start the program.
 
 [Hours tracking](hours/TRACKING.md)
 
-[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases)
+[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases/week5)
