@@ -20,4 +20,4 @@ to start the program.
 
 [Hours tracking](hours/TRACKING.md)
 
-[Latest releas][releases/latest]
+[Latest release](releases/latest)
