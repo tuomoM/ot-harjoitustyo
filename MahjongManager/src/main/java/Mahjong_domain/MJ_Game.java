@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class MJ_Game {
     private int gameId;
     private int turnNo;
+    private boolean test;
     private boolean gameEnd;
     private ArrayList<MJ_Turn> turns;
     private MJ_Turn turn;
@@ -33,11 +34,12 @@ public class MJ_Game {
         turn = new MJ_Turn(startAmount);
         this.gameId = -1;
         this.power = 0;
-        try {
-            this.gamedb = new MJ_Game_DOA(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(MJ_Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.test = test;
+       // try {
+       //     this.gamedb = new MJ_Game_DOA(false);
+        //} catch (SQLException ex) {
+        //    Logger.getLogger(MJ_Game.class.getName()).log(Level.SEVERE, null, ex);
+       // }
     }
         public MJ_Game(int gameId, boolean test){
         try {
@@ -151,6 +153,7 @@ public class MJ_Game {
     public boolean saveGame(){
         try {
             this.turns.add(this.turn);
+            this.gamedb = new MJ_Game_DOA(test);
             gamedb.saveGame(this);
            // this.turns.remove(turn);
         } catch (SQLException ex) {

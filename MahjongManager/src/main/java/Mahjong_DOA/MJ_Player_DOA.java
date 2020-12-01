@@ -60,12 +60,15 @@ public class MJ_Player_DOA {
    public void savePlayer(MJ_Player player)throws SQLException{
        
        this.db = dataBase.getDb();
+       db.setAutoCommit(false);
        //check if the player already exists
        PreparedStatement p1 =db.prepareStatement("SELECT id, name from players WHERE name =?");
        p1.setString(1, player.getName());
        ResultSet r1 = p1.executeQuery();
+       db.commit();
        if(r1.next()){
            player.setId(r1.getInt(1));
+           db.close();
            return;
        }
        
@@ -73,7 +76,7 @@ public class MJ_Player_DOA {
        PreparedStatement p = db.prepareStatement("INSERT INTO players (name) VALUES(?) ");
        p.setString(1, player.getName());
        p.executeUpdate();
-       
+        db.commit();
         try (ResultSet r = p.getGeneratedKeys()) {
             player.setId(r.getInt(1));
         }
@@ -81,9 +84,6 @@ public class MJ_Player_DOA {
        db.close();
    }
     
-   private void statementClosed(StatementEvent event){
-       
-   }
    public void closeDb() throws SQLException{
        db.close();
    }

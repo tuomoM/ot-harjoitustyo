@@ -13,15 +13,21 @@ import java.util.Scanner;
  *
  * @author tuomomehtala
  */
-public class MJ_TextUI {
+public class MJTextUI {
     
-    public static void main(String[] args) throws SQLException {
-        int resp = 0;
+    
+    
+    
+    
+    public MJTextUI() throws SQLException {
+     
+        
+    }
+    public void start() throws SQLException{
         MJ_Player_DOA playerDb = new MJ_Player_DOA(false);
         MJ_Player[] players = new MJ_Player[4];
         MJ_Player[] allPlayers = playerDb.getPlayers();
-       
-      
+        int resp = 0;
         Scanner reader = new Scanner(System.in);
         printMenuOne();
         resp = Integer.valueOf(reader.nextLine().trim());
@@ -95,7 +101,7 @@ public class MJ_TextUI {
         System.out.println("Welcome to MJ scorekeeper!");
         System.out.println("Choose action");
         System.out.println("1 = start new game");
-        System.out.println("2= continue existing game (to be implemented )");
+        System.out.println("2 = continue existing game ");
         System.out.println("3 = exit");
         
         

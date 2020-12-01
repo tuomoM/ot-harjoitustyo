@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 
-import java.util.Random; 
+
 
 
 public class MjPlayerDoaTest {
@@ -36,7 +36,7 @@ public class MjPlayerDoaTest {
              System.out.println("Database exeception 2:"+e.getMessage());
         }
     }
- 
+// 
 //    @Test
 //    public void NoSQLErrors(){
 //        boolean error = false;
@@ -80,16 +80,17 @@ public class MjPlayerDoaTest {
         }
     }
     
-//    @Test
-//    public void canCreaTwentyPlayers(){
-//        try{
-//            
-//            for(int i = 0;i<2;i++)playerDB.savePlayer(new MJ_Player("Barack Obama the "+i+"s"));
-//            assertTrue(playerDB.getPlayers()[1].getName().equals("Barack Obama the 2s"));
-//        }catch(SQLException e){
-//              System.out.println("Database exeception 6:"+e.getMessage());
-//        }
-//    }
+    @Test
+    public void canCreaTwentyPlayers(){
+        try{
+            
+            for(int i = 0;i<20;i++)playerDB.savePlayer(new MJ_Player("Barack Obama the "+i+"s"));
+        
+            assertTrue(playerDB.getPlayers()[19].getName().equals("Barack Obama the 19s"));
+        }catch(SQLException e){
+              System.out.println("Database exeception 6:"+e.getMessage());
+        }
+    }
     @Test
     public void onlyTwentyPlayersReturned(){
         try{
@@ -109,6 +110,12 @@ public class MjPlayerDoaTest {
         try{
             
             playerDB.emptyTables();
+            playerDB.closeDb();
+//            try {
+//                TimeUnit.SECONDS.sleep(5);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(MjPlayerDoaTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }catch(SQLException e){
                System.out.println("Database exeception 8:"+e.getMessage());
         }
