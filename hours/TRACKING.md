@@ -21,4 +21,6 @@ Trying to get rid of sqlite_busy exceptions|3|30-11-2020
 Debuggin saving loaded game (save changes) |3|30-11-2020
 Fixing SQLITE locked issue |2|30-11-2020
 Creating a JAR file for release|0.5|1-12-2020
-*Total*|52|
+Creating sequence and database diagrams |2|2-12-2020
+Battling with strange testing issue with testingclass MJGameDBTests. mvn doesnt seem to test it.|2|2-12-2020
+*Total*|56|

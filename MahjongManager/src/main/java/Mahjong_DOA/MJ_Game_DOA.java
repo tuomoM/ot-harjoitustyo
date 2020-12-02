@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import org.sqlite.jdbc4.JDBC4PreparedStatement;
 
 public class MJ_Game_DOA {
 
@@ -144,9 +145,10 @@ public class MJ_Game_DOA {
 
     public void saveGame(MJ_Game game) throws SQLException {
            this.db = dataBase.getDb();
+           db.setAutoCommit(false);
         if (game.getId() == -1) { // game does not yet exist in database
-            System.out.println("Branch 1");
-            db.setAutoCommit(false);
+           // System.out.println("Branch 1");
+           
             PreparedStatement p = db.prepareStatement("INSERT INTO game(status,date, power, winscore, winner, turnNo"
                     + ",player1,player2,player3,"
                     + "player4) values (?,?,?,?,?,?,?,?,?,?)");
@@ -210,12 +212,12 @@ public class MJ_Game_DOA {
             //db.setAutoCommit(true);
 
         } else { // save game that already exists in database
-            System.out.println("branch 2");
+          //  System.out.println("branch 2");
            
-            this.db.setAutoCommit(false);
+        
             PreparedStatement p = db.prepareStatement("UPDATE game SET status = ?, date = ?, power = ?, winscore = ?, turnNo = ? WHERE id = ?");
 
-            p.setString(1, String.valueOf(game.endGame()));
+            p.setString(1, String.valueOf(game.gameStatus()));
             p.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
             p.setInt(3, game.getPower());
             p.setInt(4, game.getWinningScore());
@@ -223,8 +225,12 @@ public class MJ_Game_DOA {
            p.setInt(5,game.getTurnNo());
             p.setInt(6, game.getId());
            
-            System.out.println(p.execute());
+            p.execute();
             db.commit();
+            db.close();
+            db = dataBase.getDb();
+            db.setAutoCommit(false);
+            
             //Find the turn to be updated.
             int index = -2;
             for (int i = 0; i < game.getTurns().size(); i++) {
@@ -233,11 +239,11 @@ public class MJ_Game_DOA {
                     index = i - 1;
                     break;
                 }
-            }System.out.println("index :"+index);
+            }//System.out.println("index :"+index);
             int lastI = (index > -1) ? index : game.getTurns().size()-1;
             
             
-            
+               
       
                 PreparedStatement p2 = db.prepareStatement("UPDATE turn SET winner = ? WHERE id=?");
                 p2.setInt(1, game.getTurns().get(lastI).getWinner());
@@ -247,11 +253,21 @@ public class MJ_Game_DOA {
                 PreparedStatement p7 = db.prepareStatement("UPDATE turnMoney SET money1 = ?, money2 = ?, money3 = ?, money4 = ? WHERE turnId = ?");
                 for (int i = 0; i < 4; i++) {
                     p3.setInt(i + 1, game.getTurns().get(lastI).getScore()[i]);
+                    System.out.println("score to be updated: " +i+" :"+game.getTurns().get(lastI).getScore()[i]);
                     p7.setInt(i + 1, game.getTurns().get(lastI).getMoney()[i]);
                 }   
                 p3.setInt(5,game.getTurns().get(lastI).getId() );
+                System.out.println("At id"+game.getTurns().get(lastI).getId() );
                 p7.setInt(5,game.getTurns().get(lastI).getId() );
+               try{
                 p3.execute();
+               }finally{
+                   System.out.println("Finally:" +p3.getWarnings());
+                    db.commit();
+               }
+                 db.commit();
+                 
+               
                 p7.execute();
                 db.commit();
                 if (index < game.getTurns().size() - 1 && index > -1) { // refactor to use same as update earlier.
@@ -261,7 +277,7 @@ public class MJ_Game_DOA {
                     PreparedStatement p6 = db.prepareStatement("INSERT INTO turnMoney(turnId,money1,money2,money3,money4) values (?,?,?,?,?)");
                     for (int i = lastI + 1; i < game.getTurns().size(); i++) {
                         MJ_Turn turn = game.getTurns().get(i);
-                        System.out.println("Updating turn: "+turn.getTurnNo());
+                       // System.out.println("Updating turn: "+turn.getTurnNo());
                         p4.setInt(1, game.getId());
                         p4.setInt(2, turn.getPower());
                         p4.setInt(3, turn.getTurnNo());
