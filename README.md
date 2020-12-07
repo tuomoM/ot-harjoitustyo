@@ -1,16 +1,27 @@
 # Ohjelmistotekniikka harjoitustyö
-##Mahjong manager
+## Mahjong manager
 Simple tracking tool for gameplay.
-Currently running non graphical user interface and no possibility of saving game or players.
+Currently running non graphical user interface.
 Updates coming weekly until complete.
 
 
 To run current version, replicate repository to your computer. In folder MahjongManager run 
 
-mvn compile exec:java -Dexec.mainClass=Mahjong_UI.MJ_TextUI
+>mvn compile exec:java -Dexec.mainClass=Mahjong_UI.MJ_TextUI
 
 to start the program.
 
+to build jar file in the same directory run
+
+>mvn package
+
+To run tests, in the same directory run:
+
+>mvn test
+
+To get the test report in the same directory run
+
+>mvn test jacoco:report
 
 [Requirements](documentation/REQUIREMENTS.md)
 

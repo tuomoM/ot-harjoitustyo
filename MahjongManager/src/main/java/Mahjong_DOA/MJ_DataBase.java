@@ -10,7 +10,7 @@ package Mahjong_DOA;
  * @author tuomomehtala
  */
 import java.sql.*;
-import java.util.*;
+
 
 public class MJ_DataBase {
 

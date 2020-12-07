@@ -30,7 +30,7 @@ public class MJTextUI {
         int resp = 0;
         Scanner reader = new Scanner(System.in);
         printMenuOne();
-        resp = Integer.valueOf(reader.nextLine().trim());
+        resp =  getNumber(reader);
         switch(resp){
             case 1:
                         System.out.println("Input players");
@@ -47,7 +47,7 @@ public class MJTextUI {
                     index++;
                 }
                 System.out.println("Choose players ( 1-"+index+" ) choose 0 to create a new player");
-                resp = Integer.valueOf(reader.nextLine());
+                resp = getNumber(reader);
                 if(resp!=0){
                     players[i] = allPlayers[resp-1];
                     continue;
@@ -78,7 +78,7 @@ public class MJTextUI {
                    });
                 
                     System.out.println("Input gameID to be loaded, (0 quits)");
-                 gameid = Integer.valueOf(reader.nextLine());
+                 gameid =  getNumber(reader);
                  if(gameid==0) break;
                  if(openGames.containsKey(gameid)) break;
                 }
@@ -116,7 +116,7 @@ public class MJTextUI {
             System.out.println(Arrays.toString(game.getRoundScore()));
             System.out.println("Power : "+game.powerPlayer());
             printGameMenu();
-            resp = Integer.valueOf(reader.nextLine().trim());
+            resp = getNumber(reader);
             if(resp<1){
                 if( game.saveGame()){
                     System.out.println("Game saved, game id: "+game.getId());
@@ -146,17 +146,17 @@ public class MJTextUI {
     }
     public static void givePoints(int player, Scanner reader, MJ_Game game){
         System.out.println("Enter score for player "+ game.getPlayerName(player));
-        int score = Integer.valueOf(reader.nextLine().trim());
+        int score =  getNumber(reader);
         game.setScore(player, score);
     }
     public static void endRound(Scanner reader, MJ_Game game){
         System.out.println("Which player won (1-4):");
-        int player = Integer.valueOf(reader.nextLine().trim());
+        int player = getNumber(reader);
         game.nextTurn(player-1);
     }
     public static void printGameMenu(){
         System.out.println("Choose action");
-        System.out.println("0 - exit game");
+        System.out.println("0 - exit game (saves game)");
         System.out.println("1 - add score to player 1");
         System.out.println("2 - add score to player 2");
         System.out.println("3 - add score to player 3");
@@ -176,6 +176,22 @@ public class MJTextUI {
         
         
         
+    }
+    private static int getNumber(Scanner reader){
+        String input;
+        int returnValue;
+        while(true){
+            input = reader.nextLine().trim();
+            try{
+                returnValue = Integer.valueOf(input);
+                break;
+            }catch(Exception e){
+                System.out.println("Please input a number");
+            }
+        }
+        
+        
+        return returnValue;
     }
     
     
