@@ -35,4 +35,4 @@ to generate the javadoc got to same directory and run:
 
 [Hours tracking](hours/TRACKING.md)
 
-[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases/Week5)
+[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases/week6)
