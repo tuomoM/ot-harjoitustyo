@@ -23,4 +23,7 @@ Fixing SQLITE locked issue |2|30-11-2020
 Creating a JAR file for release|0.5|1-12-2020
 Creating sequence and database diagrams |2|2-12-2020
 Battling with strange testing issue with testingclass MJGameDBTests. mvn doesnt seem to test it.|2|2-12-2020
-*Total*|56|
+Battling with one strange testing issue where one test fails even though the manual steps on same are succesfull|2|4-12-2020
+Refactoring project|2|5-12-2020
+Starting javadoc |1|8-12-2020
+*Total*|61|

@@ -7,7 +7,6 @@
 
 
 import Mahjong_domain.MJ_Turn;
-import java.util.Arrays;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,8 +20,7 @@ import java.util.Random;
 public class MJTurnTest {
    MJ_Turn turn;
    Random rand; 
-//    public Mahjong_Turn_test() {
-//    }
+
     
     @Before
     public void setUp() {

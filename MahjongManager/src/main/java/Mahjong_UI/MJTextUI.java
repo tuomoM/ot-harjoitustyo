@@ -24,9 +24,17 @@ public class MJTextUI {
         
     }
     public void start() throws SQLException{
-        MJ_Player_DOA playerDb = new MJ_Player_DOA(false);
-        MJ_Player[] players = new MJ_Player[4];
-        MJ_Player[] allPlayers = playerDb.getPlayers();
+         MJ_Player[] players = new MJ_Player[4];
+         MJ_Player[] allPlayers = null; 
+         MJ_Player_DOA playerDb = null;
+        try{
+           playerDb = new MJ_Player_DOA(false);
+       
+         allPlayers = playerDb.getPlayers();
+        }catch(SQLException e){
+            System.out.println("Error connecting database"); 
+        }
+        
         int resp = 0;
         Scanner reader = new Scanner(System.in);
         printMenuOne();
@@ -56,7 +64,12 @@ public class MJTextUI {
                 }
             }
             players[i]=new MJ_Player(reader.nextLine());
-            playerDb.savePlayer(players[i]);
+            try{
+                playerDb.savePlayer(players[i]);
+               
+            }catch(SQLException e){
+                System.out.println("Error saving to database");
+            }
             
         }
                 playerDb.closeDb();
@@ -67,8 +80,14 @@ public class MJTextUI {
                 
                 playerDb.closeDb();
                 MJ_Game_DOA gamedb = new MJ_Game_DOA(false);
-                HashMap<Integer,java.sql.Date> openGames = gamedb.getOpenGames();
+                HashMap<Integer,java.sql.Date> openGames;
+                try{
+                openGames = gamedb.getOpenGames();
                 gamedb.closeDb();
+                }catch (SQLException e){
+                    System.out.println("Error loading games from database");
+                    return;
+                }
                 int gameid = -1;
                 while(true){
                 System.out.println("Open games:");

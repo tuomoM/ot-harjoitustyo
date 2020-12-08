@@ -8,7 +8,10 @@ package Mahjong_domain;
 import java.util.Arrays;
 
 /**
- *
+ * Class represents one turn in program. 
+ * The logic for calculating the outcome is stored in this class
+ * as well as the information about the score on turn and the money at the beginning of turn.
+ * The turn object is unaware of the players, instead it considers the players to be 0,1,2 & 3. The mapping of the players is not in this class.
  * @author tuomomehtala
  */
 public class MJ_Turn  {
@@ -20,7 +23,12 @@ public class MJ_Turn  {
     private int turnNo;
     
     private int power;
-    
+    /**
+     * Creates a new turn event with money information. this is the basic constructor used in game tracking. 
+     * @param money Is the current standing of players within money. 
+     * @param power Is Player who holds the power, traditionally East at the first round of rounds
+     * @param turnNo The number of the turn
+     */
     public MJ_Turn(int[] money, int power, int turnNo){
         this.score  = new int[4];
         this.money = money;
@@ -28,6 +36,10 @@ public class MJ_Turn  {
         this.turnNo = turnNo;
         this.id = -1;
     }
+    /**
+     * Constructor to be used for games very first round. Everyone has the same amount of money
+     * @param startMoney Base money to be in game.
+     */
     public MJ_Turn(int startMoney){
         this.winner = -1;
         this.score = new int[4];
@@ -48,6 +60,15 @@ public class MJ_Turn  {
     public int getWinner(){
         return this.winner;
     }
+    /**
+     * This constructor method is to be used for loading the turns 
+     * @param money  table int[4] Money at the start of this round
+     * @param power Power player during this round
+     * @param winner Winner of this round in case already closed
+     * @param turnNo # of turn
+     * @param score table int[4] containing the scores
+     * @param id this is the id used to save and load the turn.
+     */
     public MJ_Turn(int[] money, int power, int winner, int turnNo, int[] score, int id){ // this method is for loading the instances from database.
         this.winner = winner;
         this.score = score;
@@ -56,6 +77,11 @@ public class MJ_Turn  {
         this.turnNo = turnNo;
         this.id = id;
     }
+    /**
+     * Sets the score to player for this round. System only allows positive score and players between 0 - 3
+     * @param score The score to be updated. Has to be positive number
+     * @param player  Which player is to be updated, values 0 - 3.
+     */
     public void setScore(int score, int player){
         if(player<4&&score>0)
         this.score[player] = score;
@@ -71,6 +97,12 @@ public class MJ_Turn  {
     public int[] getMoney(){
         return this.money;
     }
+    /**
+     * The method is used to get the standing for the round knowing winner and using current score.
+     * This method was made public to enable easier testing
+     * @param winner Which player won the turn? values 0 - 3
+     * @return  int[4] order where winner is always at index 0
+     */
     public int[] roundOrder(int winner){
         int[] order = {winner,-1,-1,-1};
        
@@ -124,6 +156,13 @@ public class MJ_Turn  {
         return order;
         
     }
+    /**
+     * This method is called when the turn is complete and should be scored.
+     * Logic is simple, everyone pays winner amount of his/her score
+     * everyone else pays the difference in score. power player pays and receives in double.s
+     * @param winner
+     * @return Int[4] containing the end money. 
+     */
     public int[] endTurn(int winner){  
     // could use some refactoring
         this.winner = winner;   

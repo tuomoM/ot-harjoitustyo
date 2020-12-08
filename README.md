@@ -23,6 +23,10 @@ To get the test report in the same directory run
 
 >mvn test jacoco:report
 
+to generate the javadoc got to same directory and run:
+
+>mvn javadoc:javadoc
+
 [Requirements](documentation/REQUIREMENTS.md)
 
 
