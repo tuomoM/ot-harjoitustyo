@@ -1,8 +1,7 @@
 # Ohjelmistotekniikka harjoitustyö
 ## Mahjong manager
 Simple tracking tool for gameplay.
-Currently running non graphical user interface.
-Updates coming weekly until complete.
+
 
 
 To run current version, replicate repository to your computer. In folder MahjongManager run 
@@ -27,6 +26,9 @@ to generate the javadoc got to same directory and run:
 
 >mvn javadoc:javadoc
 
+
+## links to documentation and releases
+
 [Requirements](documentation/REQUIREMENTS.md)
 
 
@@ -37,4 +39,4 @@ to generate the javadoc got to same directory and run:
 
 [Hours tracking](hours/TRACKING.md)
 
-[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases/week6)
+[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases/final)

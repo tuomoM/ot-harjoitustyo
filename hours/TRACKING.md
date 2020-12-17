@@ -1,7 +1,7 @@
-#Hours tracking
+# Hours tracking
 
 
-Activity | hours| date
+*Activity* | *hours*| *date*
 ---------|------|-------
 Requirements writing| 1 |16-11-2020
 Fighthing with netbeans | 4|16-11-2020
@@ -26,4 +26,7 @@ Battling with strange testing issue with testingclass MJGameDBTests. mvn doesnt 
 Battling with one strange testing issue where one test fails even though the manual steps on same are succesfull|2|4-12-2020
 Refactoring project|2|5-12-2020
 Starting javadoc |1|8-12-2020
-*Total*|61|
+Finishing javadoc |2|13-12-2020
+Creating usermanual |2|17-12-2020
+Creating final realease|1|17-12-2020
+*Total*|66|
