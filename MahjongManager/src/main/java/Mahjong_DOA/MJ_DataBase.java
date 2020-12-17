@@ -6,7 +6,7 @@
 package Mahjong_DOA;
 
 /**
- *
+ * Class to create all the database tables and provide the connection object.
  * @author tuomomehtala
  */
 import java.sql.*;
@@ -16,20 +16,28 @@ public class MJ_DataBase {
 
     String dbName;
     Connection db;
-    
+    /**
+     * Sets the name of the database and creates the tables if they dont exist
+     * @param name Name of the database.
+     * @throws SQLException 
+     */
     public MJ_DataBase(String name)throws SQLException{
         this.dbName = name;
         this.db = DriverManager.getConnection("jdbc:sqlite:"+dbName+".db");
        if(!DbExists()) init();
        this.db.close();
     }
+    /**
+     * Sets the database tables in place. 
+     * @throws SQLException 
+     */
     private void init()throws SQLException{
         db.setAutoCommit(false);
         Statement s = db.createStatement();
         s.execute("CREATE TABLE players (id INTEGER PRIMARY KEY, name TEXT );");
         
         db.commit();
-        //tables for saving the game
+       
         
         s.execute("CREATE TABLE game (id INTEGER PRIMARY KEY, status TEXT, date DATE, power INTEGER, winscore INTEGER, winner INTEGER, turnNo INTEGER, player1 INTEGER, player2 INTEGER, player3 INTEGER, player4 INTEGER,"+
                 "FOREIGN KEY (winner) REFERENCES player(id), FOREIGN KEY (player1) REFERENCES players(id),FOREIGN KEY (player2) REFERENCES players(id),FOREIGN KEY (player3) REFERENCES players(id)"+
@@ -46,7 +54,10 @@ public class MJ_DataBase {
         db.commit();
         db.setAutoCommit(true);
     }
-  
+  /**
+   * Method to empty the database. Should be used in test mode only.
+   * @throws SQLException 
+   */
     public void emptyDB()throws SQLException{
         this.db = getDb();
         db.setAutoCommit(false); // should be more efficient to do in one commit
@@ -66,6 +77,11 @@ public class MJ_DataBase {
        db.close();
         
     }
+    /**
+     * Returns a new connection
+     * @return
+     * @throws SQLException 
+     */
     public Connection getDb() throws SQLException{
          this.db = DriverManager.getConnection("jdbc:sqlite:"+dbName+".db");
         return this.db;

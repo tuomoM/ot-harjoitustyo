@@ -164,7 +164,7 @@ public class MJTextUI {
         
     }
     public static void givePoints(int player, Scanner reader, MJ_Game game){
-        System.out.println("Enter score for player "+ game.getPlayerName(player));
+        System.out.println("Enter score for player "+ game.getPlayers()[player].getName());
         int score =  getNumber(reader);
         game.setScore(player, score);
     }

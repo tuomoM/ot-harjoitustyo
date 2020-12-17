@@ -181,10 +181,8 @@ public class MJ_Turn  {
              endMoney[last] = money[last]-2*score[winner]- (score[second]-score[last])-(score[third]-score[last]);
            
         }else{
-            //System.out.println("nonpower:"+winner+", "+second+", "+third+", "+last );
             endMoney[winner] = money[winner] + 4* score[winner];
             if(power==second){
-               // System.out.println("Right place Winner: "+score[winner] +" second: "+score[second]+" first dif"+2*(score[second]-score[third])+" Second diff "+ 2*(score[second]-score[last]));
              endMoney[second] = money[second] - 2*score[winner] + 2*(score[second]-score[third]) + 2*(score[second]-score[last]);
               endMoney[third] = money[third] - score[winner] - 2*(score[second]-score[third]) + (score[third] - score[last]);
               endMoney[last] = money[last]-score[winner]- 2*(score[second]-score[last])-(score[third]-score[last]);

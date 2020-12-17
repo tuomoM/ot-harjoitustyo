@@ -7,7 +7,7 @@ Updates coming weekly until complete.
 
 To run current version, replicate repository to your computer. In folder MahjongManager run 
 
->mvn compile exec:java -Dexec.mainClass=Mahjong_UI.MJ_TextUI
+>mvn compile exec:java -Dexec.mainClass=Mahjong_UI.Main
 
 to start the program.
 
@@ -31,6 +31,8 @@ to generate the javadoc got to same directory and run:
 
 
 [Architecture](documentation/ARCHITECTURE.md)
+
+[User manual](documentation/USERMANUAL.md)
 
 
 [Hours tracking](hours/TRACKING.md)

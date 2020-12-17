@@ -18,7 +18,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-
+/**
+ * Database access class for game.
+ * @author tuomomehtala
+ */
 
 public class MJ_Game_DOA {
 
@@ -26,7 +29,11 @@ public class MJ_Game_DOA {
     Connection db;
     MJ_DataBase dataBase;
     private boolean test;
-
+/**
+ * Sets the database name to be used according to whether test or gameplay
+ * @param test True if this is a test run, otherwise false
+ * @throws SQLException 
+ */
     public MJ_Game_DOA(boolean test) throws SQLException {
 
         if (test) {
@@ -39,6 +46,11 @@ public class MJ_Game_DOA {
       //  this.db = dataBase.getDb();
      
     }
+    /**
+     * Returns a hashmap object with all the open games. 
+     * @return HashMap with two fields id and date of the saving.
+     * @throws SQLException 
+     */
     public HashMap<Integer,Date> getOpenGames() throws SQLException{
         this.db = dataBase.getDb();
         HashMap<Integer,Date> openGames  = new HashMap<>();
@@ -59,7 +71,12 @@ public class MJ_Game_DOA {
     public void closeDb() throws SQLException{
         db.close();
     }
-
+/**
+ * Loads game table contents for a game
+ * @param gameid
+ * @return returns the content as int[5] where indexes are 0 = (0=false, 1=true) game ended, 1 = index of current power player, 2 = winning score, 3 = winner (database id), 4 = turn number of the game.
+ * @throws SQLException 
+ */
     public int[] loadGameBasicData(int gameid) throws SQLException {
         this.db = dataBase.getDb();
         int[] gameData = new int[10];
@@ -87,7 +104,12 @@ public class MJ_Game_DOA {
         db.close();
         return gameData;
     }
-
+/**
+ * Loads the players from database for a given game id
+ * @param gameid Id of the game to be loaded
+ * @return Array of MJ_Players as players of the game.
+ * @throws SQLException 
+ */
     public MJ_Player[] loadGamePlayers(int gameid) throws SQLException {
         // consider rewriting the queries into just one query
         this.db = dataBase.getDb();
@@ -115,7 +137,12 @@ public class MJ_Game_DOA {
         
         return players;
     }
-
+/**
+ * Loads the turns of the current game from database.
+ * @param gameid
+ * @return ArrayList containing the MJ_Turn objects for the game in sorted order. The active round is the last item.
+ * @throws SQLException 
+ */
     public ArrayList<MJ_Turn> loadTurns(int gameid) throws SQLException {
            this.db = dataBase.getDb();
         ArrayList<MJ_Turn> turns = new ArrayList<>();
@@ -133,8 +160,7 @@ public class MJ_Game_DOA {
             }
             turns.add(new MJ_Turn(money, r.getInt("power"), r.getInt("winner"), r.getInt("turnNo"), score, r.getInt("id")));
         }
-        db.close();
-        //    sort the turns into right order. active should be the last.
+     
         Collections.sort(turns, (MJ_Turn t, MJ_Turn s) -> {
             return t.getTurnNo() - s.getTurnNo();
         });
@@ -142,12 +168,16 @@ public class MJ_Game_DOA {
         return turns;
 
     }
-
+/**
+ *  Method to save game into database.
+ * @param game MJ_Game object to be saved.
+ * @throws SQLException 
+ */
     public void saveGame(MJ_Game game) throws SQLException {
            this.db = dataBase.getDb();
            db.setAutoCommit(false);
-        if (game.getId() == -1) { // game does not yet exist in database
-           // System.out.println("Branch 1");
+        if (game.getId() == -1) { 
+     
            
             PreparedStatement p = db.prepareStatement("INSERT INTO game(status,date, power, winscore, winner, turnNo"
                     + ",player1,player2,player3,"
@@ -168,53 +198,16 @@ public class MJ_Game_DOA {
             p.setInt(10, game.getPlayers()[3].getId());
 
             p.execute();
-            db.commit();
-            ResultSet r = p.getGeneratedKeys();
-
-            int gameid = r.getInt(1);
-            game.setID(gameid);
-            //create the turns
-            //( TABLE turn (id INTEGER PRIMARY KEY, FOREIGN KEY (gameId) REFERENCES game(id), turnNo INTEGER, winner INTEGER)");
-            saveTurns(game,0);
-//
-//            PreparedStatement p2 = db.prepareStatement("INSERT INTO turn(gameId,power ,turnNo, winner) values (?,?,?,?)"); // idea was to create as batches, however turns out to be difficult due to poor db design.
-//            PreparedStatement p3 = db.prepareStatement("INSERT INTO turnScore(turnId,score1,score2,score3,score4) values (?,?,?,?,?)");
-//            PreparedStatement p4 = db.prepareStatement("INSERT INTO turnMoney(turnId,money1,money2,money3,money4) values (?,?,?,?,?)");
-//            for (MJ_Turn turn : game.getTurns()) {
-//                p2.setInt(1, gameid);
-//                p2.setInt(2, turn.getPower());
-//                p2.setInt(3, turn.getTurnNo());
-//                p2.setInt(4, turn.getWinner());
-//                p2.execute();
-//                db.commit();
-//                ResultSet r2 = p2.getGeneratedKeys();
-//                int turnId = r2.getInt(1);
-//                p2.clearParameters();
-//
-//                p3.setInt(1, turnId);
-//                p3.setInt(2, turn.getScore()[0]);
-//                p3.setInt(3, turn.getScore()[1]);
-//                p3.setInt(4, turn.getScore()[2]);
-//                p3.setInt(5, turn.getScore()[3]);
-//                p3.addBatch();
-//                p4.setInt(1, turnId);
-//                p4.setInt(2, turn.getMoney()[0]);
-//                p4.setInt(3, turn.getMoney()[1]);
-//                p4.setInt(4, turn.getMoney()[2]);
-//                p4.setInt(5, turn.getMoney()[3]);
-//                p4.addBatch();
-//
-//            }
-//
-//            p3.executeBatch();
-//            p4.executeBatch();
-//
-//            db.commit();
-            //db.setAutoCommit(true);
-
-        } else { // save game that already exists in database
-          //  System.out.println("branch 2");
            
+            ResultSet r = p.getGeneratedKeys();
+            
+            int gameid = r.getInt(1);
+             db.commit();
+             game.setID(gameid);
+            saveTurns(game,0);
+     
+
+        } else { 
         
             PreparedStatement p = db.prepareStatement("UPDATE game SET status = ?, date = ?, power = ?, winscore = ?, turnNo = ? WHERE id = ?");
 
@@ -222,7 +215,7 @@ public class MJ_Game_DOA {
             p.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
             p.setInt(3, game.getPower());
             p.setInt(4, game.getWinningScore());
-           // p.setInt(5, game.winner().getId());
+         
            p.setInt(5,game.getTurnNo());
             p.setInt(6, game.getId());
            
@@ -235,12 +228,12 @@ public class MJ_Game_DOA {
             //Find the turn to be updated.
             int index = -2;
             for (int i = 0; i < game.getTurns().size(); i++) {
-               // System.out.println(i+" Turn : "+ game.getTurns().get(i).getTurnNo() + " id:"+game.getTurns().get(i).getId());
+          
                 if (game.getTurns().get(i).getId() == -1) {
                     index = i - 1;
                     break;
                 }
-            }//System.out.println("index :"+index);
+            }
             int lastI = (index > -1) ? index : game.getTurns().size()-1;
             
             
@@ -254,16 +247,13 @@ public class MJ_Game_DOA {
                 PreparedStatement p7 = db.prepareStatement("UPDATE turnMoney SET money1 = ?, money2 = ?, money3 = ?, money4 = ? WHERE turnId = ?");
                 for (int i = 0; i < 4; i++) {
                     p3.setInt(i + 1, game.getTurns().get(lastI).getScore()[i]);
-                   // System.out.println("score to be updated: " +i+" :"+game.getTurns().get(lastI).getScore()[i]);
                     p7.setInt(i + 1, game.getTurns().get(lastI).getMoney()[i]);
                 }   
                 p3.setInt(5,game.getTurns().get(lastI).getId() );
-              //  System.out.println("At id"+game.getTurns().get(lastI).getId() );
                 p7.setInt(5,game.getTurns().get(lastI).getId() );
                try{
                 p3.execute();
                }finally{
-                 //  System.out.println("Finally:" +p3.getWarnings());
                     db.commit();
                }
                  db.commit();
@@ -273,53 +263,26 @@ public class MJ_Game_DOA {
                 db.commit();
                 
                 saveTurns(game,lastI+1);
-//                if (index < game.getTurns().size() - 1 && index > -1) { // refactor to use same as update earlier.
-//                    System.out.println("Updating extra turns, lastI: "+lastI);
-//                    PreparedStatement p4 = db.prepareStatement(("INSERT INTO turn(gameId,power ,turnNo, winner) values (?,?,?,?)"));
-//                    PreparedStatement p5 = db.prepareStatement("INSERT INTO turnScore(turnId,score1,score2,score3,score4) values (?,?,?,?,?)");
-//                    PreparedStatement p6 = db.prepareStatement("INSERT INTO turnMoney(turnId,money1,money2,money3,money4) values (?,?,?,?,?)");
-//                    for (int i = lastI + 1; i < game.getTurns().size(); i++) {
-//                        MJ_Turn turn = game.getTurns().get(i);
-//                       // System.out.println("Updating turn: "+turn.getTurnNo());
-//                        p4.setInt(1, game.getId());
-//                        p4.setInt(2, turn.getPower());
-//                        p4.setInt(3, turn.getTurnNo());
-//                        p4.setInt(4, turn.getWinner());
-//
-//                        p4.execute();
-//                        db.commit();
-//                        ResultSet r3 = p4.getGeneratedKeys();
-//                        int turnId = r3.getInt(1);
-//                        p4.clearParameters();
-//                        p5.setInt(1, turnId);
-//                        p5.setInt(2, turn.getScore()[0]);
-//                        p5.setInt(3, turn.getScore()[1]);
-//                        p5.setInt(4, turn.getScore()[2]);
-//                        p5.setInt(5, turn.getScore()[3]);
-//                        p5.addBatch();
-//                        p6.setInt(1, turnId);
-//                        p6.setInt(2, turn.getMoney()[0]);
-//                        p6.setInt(3, turn.getMoney()[1]);
-//                        p6.setInt(4, turn.getMoney()[2]);
-//                        p6.setInt(5, turn.getMoney()[3]);
-//                        p6.addBatch();
-//
-//                    }
-//                    p5.executeBatch();
-//                    p6.executeBatch();
-//                    db.commit();
-                //}
+
 
             }
         db.close();
 
 
     }
+    /**
+     * Method for saving new turns to database. This is a private method and is used by saveGame method.
+     * @param game Object instance of MJ_Game to be saved.
+     * @param startIndex Index of the first new turn, ie. not existing in database already.
+     * @throws SQLException 
+     */
     private void saveTurns(MJ_Game game, int startIndex) throws SQLException{
-         PreparedStatement p2 = db.prepareStatement("INSERT INTO turn(gameId,power ,turnNo, winner) values (?,?,?,?)"); // idea was to create as batches, however turns out to be difficult due to poor db design.
+  
+         PreparedStatement p2 = db.prepareStatement("INSERT INTO turn(gameId,power ,turnNo, winner) values (?,?,?,?)"); 
             PreparedStatement p3 = db.prepareStatement("INSERT INTO turnScore(turnId,score1,score2,score3,score4) values (?,?,?,?,?)");
             PreparedStatement p4 = db.prepareStatement("INSERT INTO turnMoney(turnId,money1,money2,money3,money4) values (?,?,?,?,?)");
             for (MJ_Turn turn : game.getTurns()) {
+             
                 if(turn.getTurnNo()<startIndex)continue;
                 p2.setInt(1, game.getId());
                 p2.setInt(2, turn.getPower());

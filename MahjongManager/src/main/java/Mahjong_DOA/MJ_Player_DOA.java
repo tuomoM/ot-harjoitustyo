@@ -6,9 +6,9 @@
 package Mahjong_DOA;
 import Mahjong_domain.MJ_Player;
 import java.sql.*;
-import javax.sql.StatementEvent;
+
 /**
- *
+ * DOA class for saving MJ_Players to database
  * @author tuomomehtala
  */
 public class MJ_Player_DOA {
@@ -17,6 +17,12 @@ public class MJ_Player_DOA {
     Connection db;
     MJ_DataBase dataBase; 
     private boolean test;
+    
+  /**
+   * Constructor sets the database name depending on if this is a test run or actual gameplay
+   * @param test True if test run otherwise false.
+   * @throws SQLException 
+   */  
    public MJ_Player_DOA(boolean test)throws SQLException{
     if(test){
         this.name = "MjTest";
@@ -31,6 +37,11 @@ public class MJ_Player_DOA {
     
     
 }   
+   /**
+    * Retrieve all players from database.
+    * @return array of MJ_Players saved in database
+    * @throws SQLException 
+    */
    public MJ_Player[] getPlayers()throws SQLException{
        this.db = dataBase.getDb();
        MJ_Player[] players = new MJ_Player[20];
@@ -49,6 +60,11 @@ public class MJ_Player_DOA {
        
        return players;
    }
+   /**
+    * Method to delete the contents of database. Can only be used in testing mode
+    * @return True if deletion was possible, false otherwise.
+    * @throws SQLException 
+    */
    public boolean emptyTables() throws SQLException{
        if(test){
            this.dataBase.emptyDB();
@@ -57,6 +73,12 @@ public class MJ_Player_DOA {
        return false;
        
    }
+   /**
+    * Saves the MJ_Player object instance to database if the same named player doesn't already exist.
+    * If player with same name already exists, the database will return the saved id otherwise id of the new saved entry. The returning is done by setting the value on the parameter object instance.
+    * @param player
+    * @throws SQLException 
+    */
    public void savePlayer(MJ_Player player)throws SQLException{
        
        this.db = dataBase.getDb();

@@ -5,3 +5,6 @@
 /MahjongManager/nbproject/*
 /MahjongManager/MjDb.db
 /MahjongManager/MjTest.db
+/MahjongManager/nbproject/*
+/DS_*
+*.DS_Store
