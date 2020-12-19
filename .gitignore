@@ -6,5 +6,6 @@
 /MahjongManager/MjDb.db
 /MahjongManager/MjTest.db
 /MahjongManager/nbproject/*
+/MahjongManager/nbactions.xml
 /DS_*
 .DS_Store
