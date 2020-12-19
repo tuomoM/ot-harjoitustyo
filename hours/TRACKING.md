@@ -2,12 +2,12 @@
 
 
 *Activity* | *hours*| *date*
----------|------|-------
+---------|------|-----------
 Requirements writing| 1 |16-11-2020
 Fighthing with netbeans | 4|16-11-2020
 Writing the first classes| 6|17-11-2020
 Writing the intial logic |4|21-11-2020
-Creating commandline interface|2|21-11-2020
+Creating commandline interface |2| 21-11-2020
 Writing tests and debuggin|4|22-11-2020
 Fighting with jacoco(lost the fight)|2|24-11-2020
 Trying to figure out how to clean the repository (no success)|1|24-11-2020
@@ -29,4 +29,5 @@ Starting javadoc |1|8-12-2020
 Finishing javadoc |2|13-12-2020
 Creating usermanual |2|17-12-2020
 Creating final realease|1|17-12-2020
-*Total*|66|
+Writing the test document|2|19-12-2020 
+*Total*|68|

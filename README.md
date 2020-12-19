@@ -2,8 +2,24 @@
 ## Mahjong manager
 Simple tracking tool for gameplay.
 
+## links to documentation 
+
+[Requirements](documentation/REQUIREMENTS.md)
 
 
+[Architecture](documentation/ARCHITECTURE.md)
+
+[User manual](documentation/USERMANUAL.md)
+
+[Testing document](documentation/TESTING.md)
+
+[Hours tracking](hours/TRACKING.md)
+
+## latest release
+
+[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases/final)
+
+## commandline commands
 To run current version, replicate repository to your computer. In folder MahjongManager run 
 
 >mvn compile exec:java -Dexec.mainClass=Mahjong_UI.Main
@@ -26,17 +42,8 @@ to generate the javadoc got to same directory and run:
 
 >mvn javadoc:javadoc
 
+To create the report on checkstyle rules run
+> mvn jxr:jxr checkstyle:checkstyle
 
-## links to documentation and releases
+The resulting error log can be found at target/site/checkstyle.html
 
-[Requirements](documentation/REQUIREMENTS.md)
-
-
-[Architecture](documentation/ARCHITECTURE.md)
-
-[User manual](documentation/USERMANUAL.md)
-
-
-[Hours tracking](hours/TRACKING.md)
-
-[Latest release](https://github.com/tuomoM/ot-harjoitustyo/releases/final)
