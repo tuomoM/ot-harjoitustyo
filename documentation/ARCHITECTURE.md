@@ -14,7 +14,7 @@ Package [Mahjong_UI](https://github.com/tuomoM/ot-harjoitustyo/tree/master/Mahjo
 
 ## User interface
 
-User interface is built as a simple text userinterface defined in class [MJTextUI.java](https://github.com/tuomoM/ot-harjoitustyo/blob/master/MahjongManager/src/main/java/Mahjong_UI/MJTextUI.java). It serves the purpose and is easy to use.
+User interface is built as a simple text based program defined in class [MJTextUI.java](https://github.com/tuomoM/ot-harjoitustyo/blob/master/MahjongManager/src/main/java/Mahjong_UI/MJTextUI.java). It serves the purpose and is easy to use.
 
 ## Application logic
 
@@ -51,7 +51,7 @@ Database has following design:
 
 ![db diagram](dbdiagram1.jpeg)
 
-## game locig flow
+## game logic flow
 
 The logic of the program is straight forward. 
 The sample says that there is no loading from database in that process and it means that game is started from scratch and not taken an old game from database. At the end the system automatically saves the game in to database. This is to prevent possibly already saved games from appearing in open games and for possible (dream on...) addition of reporting on which player has won or lost the most etc.
