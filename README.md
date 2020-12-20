@@ -1,11 +1,11 @@
 # Ohjelmistotekniikka harjoitustyö
 ## Mahjong manager
-Simple tracking tool for gameplay.
+Simple tracking tool for gameplay. Tool provides tracking of the status aswell as logic for score calculations.
+The tool runs simple text UI.
 
 ## links to documentation 
 
 [Requirements](documentation/REQUIREMENTS.md)
-
 
 [Architecture](documentation/ARCHITECTURE.md)
 
@@ -45,5 +45,5 @@ to generate the javadoc got to same directory and run:
 To create the report on checkstyle rules run
 > mvn jxr:jxr checkstyle:checkstyle
 
-The resulting error log can be found at target/site/checkstyle.html
+The resulting error log can be found at target/site/checkstyle.html. Note that checkstyle has been completely ignored in this project.
 

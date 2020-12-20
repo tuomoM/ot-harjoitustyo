@@ -31,4 +31,5 @@ Creating usermanual |2|17-12-2020
 Creating final realease|1|17-12-2020
 Writing the test document|2|19-12-2020 
 Writing the architecture document|2|19-12-2020
+Finishing the achitecture document|1|20-12-2020
 *Total*|70|
