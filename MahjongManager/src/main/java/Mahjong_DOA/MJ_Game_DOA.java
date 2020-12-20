@@ -12,12 +12,12 @@ package Mahjong_DOA;
 import Mahjong_domain.MJ_Game;
 import Mahjong_domain.MJ_Player;
 import Mahjong_domain.MJ_Turn;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+
 /**
  * Database access class for game.
  * @author tuomomehtala

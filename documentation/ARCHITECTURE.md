@@ -14,7 +14,7 @@ Package [Mahjong_UI](https://github.com/tuomoM/ot-harjoitustyo/tree/master/Mahjo
 
 ## User interface
 
-User interface is built as a simple text userinterface. It serves the purpose and is easy to use.
+User interface is built as a simple text userinterface defined in class [MJTextUI.java](https://github.com/tuomoM/ot-harjoitustyo/blob/master/MahjongManager/src/main/java/Mahjong_UI/MJTextUI.java). It serves the purpose and is easy to use.
 
 ## Application logic
 
@@ -61,4 +61,9 @@ The sample says that there is no loading from database in that process and it me
 
 
 
+## Architectural considerations
 
+The proper separation of database activities from game logic was on list of planned actions at the end, this means mostly handling the possible SQL exceptions in DAO classes was not done due to fact that my mac was upgraded to big sur and Java ceased to work. This would have enabled me to properly create the interface based approach and remove the unecessary method calls from code.
+
+
+Also the database design would need refactoring which would inturn enable simplification of the DOA classes.
