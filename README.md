@@ -45,5 +45,5 @@ to generate the javadoc got to same directory and run:
 To create the report on checkstyle rules run
 > mvn jxr:jxr checkstyle:checkstyle
 
-The resulting error log can be found at target/site/checkstyle.html. Note that checkstyle has been completely ignored in this project.
+The resulting error log can be found at target/site/checkstyle.html. Note that checkstyle rules and checks have been completely ignored in this project.
 
